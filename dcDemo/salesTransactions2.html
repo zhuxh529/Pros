@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>dc.js - Dimensional Charting Javascript Library</title>
+
+    <meta charset="UTF-8">
+
+    <script type="text/javascript" src="../d3/d3.v2.js"></script>
+    <script type="text/javascript" src="../d3/crossfilter.v1.min.js"></script>
+
+    <script type="text/javascript" src="../d3/dc1.1.js"></script>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">  <!-- needed to format the table -->
+    <link href="css/dc.css" rel="stylesheet"/>
+</head>
+<body>
+
+<div class="container">
+
+<h1>PPSS Sales Transaction Data</h1>
+<div>Based on dc.js which is based on crossfilter and d3.
+  <span style="display:inline; position:relative; left:190px; align:right">
+      <a href="javascript:dc.filterAll(); dc.renderAll();">Reset All</a>
+  </span>
+</div>
+
+
+<div class="row">
+    <div id="customer-bubble-chart" class="dc-chart">
+        <strong>Customers</strong> (x: net revenue, &nbsp;y: COGS,&nbsp; radius:sales volume,&nbsp; color: std discount)
+        <a class="reset" href="javascript:customerBubbleChart.filterAll(); dc.redrawAll();" style="display: none;">reset</a>
+        <div class="clearfix"></div>
+    </div>
+
+    <div id="product-category-pie-chart" >
+        <strong>Product Category</strong>
+        <a class="reset" href="javascript:productCategoryPieChart.filterAll(); dc.redrawAll();" style="display: none;">reset</a>
+        <div class="clearfix"></div>
+    </div>
+</div>
+
+<div class="row">
+    <div id="store-pie-chart">
+        <strong>Stores</strong>
+        <a class="reset" href="javascript:storePieChart.filterAll(); dc.redrawAll();" style="display: none;">reset</a>
+        <div class="clearfix"></div>
+    </div>
+
+    <div id="plant-pie-chart">
+        <strong>Plants</strong>
+        <a class="reset" href="javascript:plantPieChart.filterAll(); dc.redrawAll();" style="display: none;">reset</a>
+        <div class="clearfix"></div>
+    </div>
+
+    <div id="customer-group-pie-chart">
+        <strong>Customer Group</strong>
+        <a class="reset" href="javascript:customerGroupPieChart.filterAll(); dc.redrawAll();" style="display: none;">reset</a>
+        <div class="clearfix"></div>
+    </div>
+
+    <div id="sales-person-pie-chart" >
+        <strong>Sales People</strong>
+        <a class="reset" href="javascript:salesPersonPieChart.filterAll(); dc.redrawAll();" style="display: none;">reset</a>
+        <div class="clearfix"></div>
+    </div>
+
+    <div id="quarter-chart" >
+        <strong>Quarters</strong>
+        <a class="reset" href="javascript:quarterPieChart.filterAll();dc.redrawAll();" style="display: none;">reset</a>
+        <div class="clearfix"></div>
+    </div>
+</div>
+
+<div class="row">
+    <div id="pocket-price-chart">
+        <strong>Pocket Price Distribution</strong>
+        <a class="reset" href="javascript:pocketPriceBandChart.filterAll(); dc.redrawAll();" style="display: none;">reset</a>
+        <div class="clearfix"></div>
+    </div>
+
+    <div id="cogs-chart">
+        <strong>COGS Distribution</strong>
+        <a class="reset" href="javascript:cogsBandChart.filterAll(); dc.redrawAll();" style="display: none;">reset</a>
+        <div class="clearfix"></div>
+    </div>
+</div>
+
+<div class="row">
+    <div id="pocket-price-over-time-chart">
+        <strong>Pocket Price over Time</strong>
+        <a class="reset" href="javascript:pocketPriceOverTimeChart.filterAll(); dc.redrawAll();" style="display: none;">reset</a>
+        <div class="clearfix"></div>
+    </div>
+
+    <div id="customer-group-bar-chart">
+        <strong>Product Category by Customer Group (Volume)</strong>
+        <a class="reset" href="javascript:customerGroupBarChart.filterAll(); dc.redrawAll();" style="display: none;">reset</a>
+        <div class="clearfix"></div>
+    </div>
+
+    <div style="float: right; text-align: left; width: 300px">      <!-- legend -->
+        <table  style="width:100%;">
+            <tr style="line-height: 12px;">
+                <td>Customer group: </td>
+                <td style="background-color:#c34284; width:8px;"></td>
+                <td>Small</td>
+                <td style="background-color:#26aa54; width:8px;"></td>
+                <td>Medium</td>
+                <td style="background-color:steelblue; width:8px;"></td>
+                <td>Large</td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<div class="row">
+    <div id="transactions-over-time-chart" >
+        <strong>Sales Transactions over Time  </strong>Green Line : List Price; Blue line: Net Revenue
+        <a class="reset" href="javascript:volumeOverTimeChart.filterAll(); dc.redrawAll();"
+           style="display: none;">reset</a>
+        <div class="clearfix"></div>
+    </div>
+</div>
+
+<div class="row"> <!-- acts as range selector for transactions over time -->
+    <div id="volume-over-time-chart">
+    </div>
+</div>
+
+<div class="row">
+    <div>
+        <div class="dc-data-count">
+            <span class="filter-count"></span> selected out of
+            <span class="total-count"></span> records | <a href="javascript:dc.filterAll(); dc.renderAll();">Reset All</a>
+        </div>
+    </div>
+    <table class="table table-hover dc-data-table">
+        <thead>
+        <tr class="header">
+            <th>Customer</th>
+            <th>Product</th>
+            <th>Plant</th>
+            <th>Sales Org</th>
+            <th>Sales Person</th>
+            <th>Sales Volume</th>
+            <th>List Price</th>
+            <th>Std Discount</th>
+            <th>COGS</th>
+            <th>Net Revenue</th>
+            <th>Pocket Price</th>
+            <!--
+            dimensions:
+                DAY, CUSTOMER, CUSTOMER_GROUP, CUSTOMER_STORE_ID, SKU, CATEGORY, PLANT, SALES_ORGANIZATION,
+                SALES_REGION, SALES_PERSON, FD_DEAL_ID,
+            measures:
+                SALES_VOLUME, LIST_PRICE, ORDER_SIZE_DISCOUNT, STD_DISCOUNT, CARRYING_COST, DISTRIBUTION_COST,
+                ADVERTISING_COSTS, COGS, NET_REVENUE, POCKET_PRICE, INVOICE     -->
+        </tr>
+        </thead>
+    </table>
+</div>
+
+<script type="text/javascript">
+
+    var customerBubbleChart = dc.bubbleChart("#customer-bubble-chart");
+    var productCategoryPieChart = dc.pieChart("#product-category-pie-chart");
+    var storePieChart = dc.pieChart("#store-pie-chart");
+    var plantPieChart = dc.pieChart("#plant-pie-chart");
+    var customerGroupPieChart = dc.pieChart("#customer-group-pie-chart");
+    var salesPersonPieChart = dc.pieChart("#sales-person-pie-chart");
+    var quarterPieChart = dc.pieChart("#quarter-chart");
+    var pocketPriceBandChart = dc.barChart("#pocket-price-chart");
+    var cogsBandChart = dc.barChart("#cogs-chart");
+    var pocketPriceOverTimeChart = dc.lineChart("#pocket-price-over-time-chart");
+    var customerGroupBarChart = dc.barChart("#customer-group-bar-chart");
+    var transactionsOverTimeChart = dc.compositeChart("#transactions-over-time-chart");
+    var volumeOverTimeChart = dc.barChart("#volume-over-time-chart");
+
+    // load data from a csv file
+    d3.csv("../ppssData/salesTransactions.csv", function(data) {
+        // since its a csv file we need to format the data a bit
+        var dateFormat = d3.time.format("%Y%m%d");
+        var dateLabelFormat = d3.time.format("%m/%d/%Y");
+        var numberFormat = d3.format(",.2f");
+
+        data.forEach(function(e) {
+            e.dateDay = dateFormat.parse(e.DAY);
+            e.month = d3.time.month(e.dateDay); // pre-calculate month for better performance
+        });
+
+        // feed it through crossfilter
+        var salesTransactions = crossfilter(data);
+        var all = salesTransactions.groupAll();
+
+        var customerDimension = salesTransactions.dimension(function(d) {
+            return d.CUSTOMER;
+        });
+
+        var customerPerformanceGroup = customerDimension.group().reduce(
+            function(p, v) {     //add
+                ++p.count;
+                p.salesVolume += +v.SALES_VOLUME;
+                p.cogs += +v.COGS;
+                p.netRevenue += +v.NET_REVENUE;
+                p.stdDiscount += +v.STD_DISCOUNT;
+                return p;
+            },
+            function(p, v) {    //remove
+                --p.count;
+                p.salesVolume -= +v.SALES_VOLUME;
+                p.cogs -= +v.COGS;
+                p.netRevenue -=  +v.NET_REVENUE;
+                p.stdDiscount -= +v.STD_DISCOUNT;
+                return p;
+            },
+            function() {    //init
+                return {count:0, salesVolume:0, cogs:0, netRevenue:0, stdDiscount:0};
+            }
+        );
+        var salesVolumeRange = findRange(customerPerformanceGroup, function(d) {return d.value.salesVolume;});
+        var cogsRange = findRange(customerPerformanceGroup, function(d) {return d.value.cogs;});
+        var netRevenueRange = findRange(customerPerformanceGroup, function(d) {return d.value.netRevenue;});
+        var stdDiscountRange = findRange(customerPerformanceGroup, function(d) {return d.value.stdDiscount;});
+
+        var dateDimension = salesTransactions.dimension(function(d) {
+            return d.dateDay;
+        });
+        var timeDomain = findDateRange(dateDimension);
+        var timeMonths = salesTransactions.dimension(function(d) {return d.month;});
+        var monthDomain = findMonthRange(dateDimension);
+
+        var transactionsOverTimeGroup = dateDimension.group().reduceSum(function(d) {
+            return +d.LIST_PRICE;
+        });
+        var volumeOverTimeGroup = dateDimension.group().reduceSum(function(d) {
+            return +d.SALES_VOLUME;
+        });
+        var netRevenueByDayGroup = dateDimension.group().reduce(
+            function(p, v) {    // add
+                p.days++;
+                p.totalNetRevenue += +v.NET_REVENUE;
+                return p;
+            },
+            function(p, v) {     // remove
+                p.days--;
+                p.totalNetRevenue -= +v.NET_REVENUE;
+                return p;
+            },
+            function() {         //init
+                return {days:0, totalNetRevenue:0};
+            }
+        );
+
+        var pocketPriceByMonthGroup = timeMonths.group().reduce(
+            function(p, v) {
+                p.totalCount++;
+                p.totalPocketPrice += +v.POCKET_PRICE;
+                return p;
+            },
+            function(p, v) {
+                p.totalCount--;
+                p.totalPocketPrice -= +v.POCKET_PRICE;
+                return p;
+            },
+            function() {
+                return {totalCount:0, totalPocketPrice:0};
+            }
+        );
+
+        var storeDimension = salesTransactions.dimension(function(d) {return d.CUSTOMER_STORE_ID;});
+        var plantDimension = salesTransactions.dimension(function(d) {return d.PLANT;});
+        var customerGroupDimension = salesTransactions.dimension(function(d) {return d.CUSTOMER_GROUP;});
+        var productCategoryDimension = salesTransactions.dimension(function(d) {return d.CATEGORY;});
+        var salesPersonDimension = salesTransactions.dimension(function(d) {return d.SALES_PERSON;});
+        var pocketPriceDimension = salesTransactions.dimension(function(d) {return Math.round(d.POCKET_PRICE/100);});
+        var cogsDimension = salesTransactions.dimension(function(d) {return Math.round(d.COGS/1000);});
+        var pocketPriceRange = findRange(pocketPriceDimension, function(d) {return d.POCKET_PRICE;});
+        var cogsRange2 = findRange(cogsDimension, function(d) {return d.COGS;});
+        var productCategoryDomain = findOrdinalDomain(productCategoryDimension, function(d) {return d.CATEGORY;});
+        //alert("pocketPriceRange="+pocketPriceRange +  " productCategoryDomain="+ productCategoryDomain);
+
+        var quarterDimension = salesTransactions.dimension(function(d) {
+            var month = d.dateDay.getMonth();
+            if (month <= 3)  {
+                return "Q1";
+            } else if (month > 3 && month <= 5) {
+                return "Q2";
+            } else if (month > 5 && month <= 7) {
+                return "Q3";
+            } else {
+                return "Q4";
+            }
+        });
+
+        // use map for values to make more generic
+        var volumeByCategory = productCategoryDimension.group().reduce(
+            function(p, v) {              // add
+                p.volumeMap[v.CUSTOMER_GROUP] += +v.SALES_VOLUME;
+                return p;
+            },
+            function(p, v) {             // remove
+                p.volumeMap[v.CUSTOMER_GROUP] -= +v.SALES_VOLUME;
+                return p;
+            },
+            function() {
+                var p = {};
+                p.volumeMap = {SMALL:0, MEDIUM:0, LARGE:0};
+                return p;
+            }
+        );
+
+        /** used for tooltips and labels in the charts */
+        function labelFunc(d) {return d.data.key;}
+        function ttipFunc(d) { return d.data.key + " (" + numberFormat(d.data.value) + ")";}
+
+        function initPieChart(pieChart, dimension) {
+            pieChart.width(190).height(150)
+                .radius(70)
+                .innerRadius(30)
+                .dimension(dimension)
+                .group(dimension.group())
+                .label(labelFunc)
+                .title(ttipFunc);
+        }
+
+        // (x: net revenue, y: COGS, radius:sales volume, color: std discount)
+        customerBubbleChart.width(760).height(190)
+            .margins({top: 20, right: 50, bottom: 30, left: 80})
+            .dimension(customerDimension)
+            .group(customerPerformanceGroup)
+            .transitionDuration(1500)
+            //.colors(["#a60000","#ff0000", "#ff4040","#ff7373", "#67e667","#39e639", "#00cc00"])
+            .colors(["#ff9911", "#a1cc22", "#11dd22", "#22bb99", "#3333ee"])
+            .colorDomain([-900000, 20000000])
+            .colorAccessor(function(d){return d.value.stdDiscount;})
+            .keyAccessor(function(d) {return d.value.stdDiscount;})
+            .valueAccessor(function(d) {return d.value.cogs;})   // was percent gain
+            .radiusValueAccessor(function(d) {return d.value.salesVolume;})
+            .maxBubbleRelativeSize(0.2)   // ratio of biggest to smallest bubble
+            .x(d3.scale.linear().domain([]))
+            .y(d3.scale.linear().domain([]))
+            .r(d3.scale.linear().domain([0, 100 * salesVolumeRange[1]]))
+            .elasticY(true)
+            .yAxisPadding(50)
+            .elasticX(true)
+            .xAxisPadding(200)
+            .renderHorizontalGridLines(true)
+            .renderVerticalGridLines(true)
+            .renderLabel(true)
+            .renderTitle(true)
+            .label(function(p) {return p.key;})
+            .title(function(p) {
+                return p.key
+                        + "\n"
+                        + "X: Net Revenue: " + numberFormat(p.value.netRevenue) + "\n"
+                        + "Y: COGS: " + numberFormat(p.value.cogs) + "\n"
+                        + "Radius: Sales Volume: " + numberFormat(p.value.salesVolume) + "\n"
+                        + "Color: Std Discount: " + numberFormat(p.value.stdDiscount);
+            })
+            .yAxis().tickFormat(function(v) {return numberFormat(v);});
+
+        initPieChart(productCategoryPieChart, productCategoryDimension);
+        initPieChart(customerGroupPieChart, customerGroupDimension);
+        initPieChart(storePieChart, storeDimension);
+        initPieChart(plantPieChart, plantDimension);
+        initPieChart(salesPersonPieChart, salesPersonDimension);
+        initPieChart(customerGroupPieChart, customerGroupDimension);
+        initPieChart(quarterPieChart, quarterDimension);
+
+        pocketPriceBandChart.width(480).height(150)
+            .margins({top: 10, right: 10, bottom: 30, left: 40})
+            .dimension(pocketPriceDimension)
+            .group(pocketPriceDimension.group())
+            .elasticY(true)
+            .centerBar(true)
+            .gap(1)
+            //.round(dc.round.floor)
+            .x(d3.scale.linear().domain([0, Math.round(pocketPriceRange[1]/100.0)]))
+            .renderHorizontalGridLines(true)
+            .xAxis()
+            .tickFormat(function(v) {return v * 100;});
+
+        cogsBandChart.width(480).height(150)
+            .margins({top: 10, right: 10, bottom: 30, left: 45})
+            .dimension(cogsDimension)
+            .group(cogsDimension.group())
+            .elasticY(true)
+            .centerBar(false)
+            .gap(1)
+            //.round(dc.round.floor)
+            .x(d3.scale.linear().domain([0, Math.round(cogsRange2[1]/1000.0)]))
+            .renderHorizontalGridLines(true)
+            .xAxis().ticks(4)
+            .tickFormat(function(v) {return v * 100;});  // should be * 1000, but that will not fit well
+
+        pocketPriceOverTimeChart.width(480).height(150)
+            .margins({top: 10, right: 10, bottom: 30, left: 70})
+            .dimension(timeMonths)
+            .group(pocketPriceByMonthGroup)
+            .round(d3.time.month.round)
+            .valueAccessor(function(d) {return d.value.totalPocketPrice; })
+            .x(d3.time.scale().domain(monthDomain))
+            .xUnits(d3.time.months)
+            .renderHorizontalGridLines(true)
+            .elasticY(true)
+            .brushOn(true)
+            .title(function(d){
+                return d.key + "\nPocket Price: " + numberFormat(d.value.totalPocketPrice);
+            })
+            .xAxis().ticks(8);
+
+        customerGroupBarChart.width(480).height(150)
+            .margins({top: 10, right: 0, bottom: 30, left: 60})
+            .dimension(productCategoryDimension)
+            .group(volumeByCategory)
+            .valueAccessor(function(d) {return d.value.volumeMap["LARGE"];})
+            .stack(volumeByCategory, function(d){return d.value.volumeMap["MEDIUM"];})
+            .stack(volumeByCategory, function(d){return d.value.volumeMap["SMALL"];})
+            .x(d3.scale.ordinal().domain(productCategoryDomain))
+            .xUnits(dc.units.ordinal)
+            .renderHorizontalGridLines(true)
+            .centerBar(false)
+            .elasticY(true)
+            .brushOn(false)
+            .label(function(d) { return (d.key.length > 5) ? (d.key.substring(0, 4) + "&#8230;") : d.key;})
+            .title(function(d) {
+                return d.key
+                    + "\nSmall: " + numberFormat(d.value.volumeMap["SMALL"])
+                    + "\nMedium: " + numberFormat(d.value.volumeMap["MEDIUM"])
+                    + "\nLarge: " + numberFormat(d.value.volumeMap["LARGE"]);
+            })
+            .xAxis()
+            .tickFormat(function(v) {return (v.length > 8) ? (v.substring(0, 8) + "-") : v;});  // "&#8230;"
+
+        transactionsOverTimeChart.width(1000).height(150)
+            .margins({top: 10, right: 20, bottom: 1, left: 60})
+            .dimension(dateDimension)
+            .group(netRevenueByDayGroup)
+            .valueAccessor(function(d) {return d.value.totalNetRevenue;})
+            .x(d3.time.scale().domain(timeDomain))
+            //.round(d3.time.month.round)
+            .xUnits(d3.time.days)
+            .elasticY(true)
+            .renderHorizontalGridLines(true)
+            .brushOn(false)
+            .compose([
+                dc.lineChart(transactionsOverTimeChart).group(netRevenueByDayGroup)
+                    .valueAccessor(function(d){return d.value.totalNetRevenue;})
+                    .renderArea(true)
+                    .stack(transactionsOverTimeGroup, function(d){return d.value;})
+                    .title(function(d){
+                        var isNetRevenue = d.value.totalNetRevenue;
+                        var value = isNetRevenue ? d.value.totalNetRevenue : d.value;
+                        if (isNaN(value)) {
+                            value = 0;
+                        }
+                        return dateLabelFormat(d.key)
+                                + (isNetRevenue?"\nNet Revenue: $":"\nList Price: $")
+                                + numberFormat(value);
+                    })
+             ])
+            .xAxis().tickValues([]);
+
+        volumeOverTimeChart.width(1000).height(40)
+            .margins({top: 0, right: 20, bottom: 20, left: 60})
+            .dimension(dateDimension)
+            .group(volumeOverTimeGroup)
+            .centerBar(true)
+            .x(d3.time.scale().domain(timeDomain))
+            //.round(d3.time.month.round)
+            .xUnits(d3.time.days)
+            .renderlet(function(chart){
+                chart.select("g.y").style("display", "none");
+                transactionsOverTimeChart.filter(chart.filter());
+            });
+
+        dc.dataCount(".dc-data-count")
+                .dimension(salesTransactions)
+                .group(all);
+
+        dc.dataTable(".dc-data-table")
+                .dimension(customerDimension)
+                .group(function(d) {return d.CUSTOMER;})
+                .size(10)
+                .columns([
+            function(d) {return d.CUSTOMER;},
+            function(d) {return d.SKU;},
+            function(d) {return d.PLANT;},
+            function(d) {return d.SALES_ORGANIZATION;},
+            function(d) {return d.SALES_PERSON;},
+            function(d) {return numberFormat(d.SALES_VOLUME);},
+            function(d) {return '$'+numberFormat(d.LIST_PRICE);},
+            function(d) {return '$'+numberFormat(d.STD_DISCOUNT);},
+            function(d) {return '$'+numberFormat(d.COGS);},
+            function(d) {return '$'+numberFormat(d.NET_REVENUE);},
+            function(d) {return '$'+numberFormat(d.POCKET_PRICE);}
+        ])
+        .sortBy(function(d) {return d.CUSTOMER;})
+        .order(d3.ascending)
+        .renderlet(function(table){
+            table.selectAll(".dc-table-group").classed("info", true);
+        });
+
+        dc.renderAll();
+    }
+);
+
+/** @return the date range for the time dimensions */
+function findDateRange(dateDim) {
+    var dateValues = dateDim.top(Infinity);
+    return [dateValues[dateValues.length-1].dateDay, dateValues[0].dateDay];
+}
+
+function findMonthRange(dateDim) {
+    var yearFormat = d3.time.format("%Y");
+    var dateValues = dateDim.top(Infinity);
+    var firstYear = +yearFormat(dateValues[dateValues.length-1].dateDay);
+    var lastYear = +yearFormat(dateValues[0].dateDay);
+    return [new Date(firstYear, 0, 1), new Date(lastYear + 1, 0, 1)];
+}
+
+function findRange(dim, valueOf) {
+    var values = dim.top(Infinity);
+    var firstValue = valueOf(values[values.length-1]);
+    var lastValue = valueOf(values[0]);
+    return [firstValue, lastValue];
+}
+
+function findOrdinalDomain(dim, valueOf) {
+    var values = dim.top(Infinity);
+    var domainValues = [];
+    values.forEach(function(e) {
+        domainValues.push(valueOf(e));
+    });
+    return domainValues;
+}
+</script>
+
+  <div class="clearfix"></div>
+</div>
+</body>
+</html>
