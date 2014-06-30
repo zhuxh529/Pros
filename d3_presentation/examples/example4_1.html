@@ -1,0 +1,53 @@
+<!doctype html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>dynamicbars</title>
+  <!-- CSS -->
+  <style type="text/css">
+    div {
+      /*
+      transition: all 500ms ease-in;
+      */
+    }
+  </style>
+  <link rel="stylesheet" type="text/css" href="assets/style.css" media="screen" />
+</head>
+<body>
+
+  <!-- HTML -->
+  <div class="container">
+
+  </div>
+
+  <!-- Js -->
+  <script src="assets/d3.min.js" charset="utf-8"></script>
+  <script src="assets/dataset.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    var Chart = function(dataset){
+      dataset = d3.shuffle(dataset).slice(0,5);
+      dataset = dataset.sort(function(a,b){ return d3.ascending(a.sepalWidth,b.sepalWidth);});
+
+
+      var data = d3.select(".container").selectAll("div")
+                  .data(dataset)
+                  .style("width", function(d){return d.sepalWidth*40 + "px"})
+                  .text(function(d){return d.species})
+                  .attr("class",function(d){return d.species});
+
+      data.enter()
+          .append("div")
+          .style("width", function(d){return d.sepalWidth*40 + "px"})
+          .text(function(d){return d.species})
+          .attr("class",function(d){return d.species})
+    }
+
+    Chart(dataset);
+
+    setInterval(function(){
+      Chart(dataset);
+    }, 1000);
+
+  </script>
+</body>
+</html>

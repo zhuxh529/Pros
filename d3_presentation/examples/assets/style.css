@@ -1,0 +1,76 @@
+/* Setosa */
+.setosa{
+  fill:rgba(230,0,0,0.7);
+  background-color:rgba(230,0,0,0.7);
+}
+.setosa.selected{
+  fill:rgba(230,0,0,0.3);
+}
+
+/* versicolor */
+.versicolor {
+  fill: rgba(50,150,0,0.7);
+  background-color: rgba(50,150,0,0.7);
+}
+.versicolor.selected{
+  fill: rgba(50,150,0,0.3);
+}
+
+/* virginica */
+.virginica {
+  fill:rgba(10,50,150,0.6);
+  background-color:rgba(10,50,150,0.6);
+}
+.virginica.selected{
+  fill:rgba(10,50,150,0.3);
+}
+
+.axis path,
+.axis line {
+ fill: none;
+ stroke: black;
+ shape-rendering: crispEdges;
+}
+.axis text {
+ font-family: sans-serif;
+ font-size: 11px;
+}
+
+.grid .tick {
+  stroke: #EEE;
+  opacity: 0.1;
+}
+.grid .minor line {
+  stroke-opacity: .5;
+}
+.grid path {
+  display: none;
+}
+
+.brush .extent {
+  fill-opacity: .125;
+  shape-rendering: crispEdges;
+}
+
+div {
+  height: 20px;
+  margin-bottom: 5px;
+}
+
+div.setosa {
+  width:40px;
+  color: white;
+}
+div.versicolor {
+  width:80px;
+  color:white;
+}
+div.virginica {
+  width:120px;
+  color:white;
+}
+
+.container {
+  height: 150px;
+  display:inline-block;
+}

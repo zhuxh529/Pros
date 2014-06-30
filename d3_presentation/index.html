@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>reveal.js - The HTML Presentation Framework</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+		<script>
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = 'css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <style>
+      span.code {
+        font-family: monospace;
+        font-weight: bold;
+        background-color:#3F3F3F;
+      }
+    </style>
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+        <!-- Intro -->
+        <section>
+					<h1>D3 workshop</h1>
+					<h3>An introduction to D3</h3>
+					<h4>Created by</h4>
+					<p>
+						<small> <a href="http://nadafancy.com">Luis Gutierrez</a> / <a href="http://twitter.com/Dudemullt">@Dudemullet</a></small>
+					</p>
+				</section>
+
+        <!-- What is D3?-->
+        <section>
+          <section>
+  					<h1>What is D3?</h1>
+          </section>
+
+          <section class="scrolls">
+            <h1>Tom MacWright</h1>
+            <h2><a href="http://www.macwright.org/presentations/dcjq/">a fun, difficult introduction to d3</a></h2>
+            <p>Twitter: <a href="https://twitter.com/tmcw">@tmcw</a></p>
+            <p>Github: <a href="http://github.com/tmcw">tmcw</a></p>
+            <p><a href="http://macwright.org/">macwright.org</a></p>
+          </section>
+
+          <section>
+            <h1>What D3 is not</h1>
+            <ul>
+              <li class="fragment" data-fragment-index="0">Not a chart library</li>
+              <li class="fragment" data-fragment-index="1">Not a map library</li>
+              <li class="fragment" data-fragment-index="2">Not a compatibility layer</li>
+              <li class="fragment" data-fragment-index="3">Not about SVG, HTML or canvas
+                <ul><li class="fragment" data-fragment-index="4">Though, it can be used for all these things</li></ul>
+              </li>
+            </ul>
+          </section>
+
+          <section>
+            <h1>D3 is<h1>
+            <h2>data -> documents</h2>
+            <h3 class="fragment" data-fragment-id="0">Data Driven Documents</h3>
+            <h4 class="fragment" data-fragment-id="1">D3</h4>
+          </section>
+				</section>
+
+        <!-- Example1 : data binding -->
+				<section>
+					<section>
+						<h2>Data binding and joins</h2>
+						<img src="img/thinking.png">
+					</section>
+
+          <section>
+            <h2>Selections</h2>
+            <p>You get elements by using jQuery style selectors</p>
+            <pre><code>d3.select("div");
+d3.selectAll(".byClass");
+d3.select("#idSelector");</code></pre>
+            <p>All of these functions will always return selections</p>
+          </section>
+
+					<section>
+            <h2>Data</h2>
+
+            <p>In D3, data can only be bound to a selection.</p>
+            <p>In other words, selections have a method called <em>data</em></p>
+            <p><small><a href="http://bost.ocks.org/mike/join/">Thinking with joins</a></small></p>
+            <pre><code>var dataset = [1,2,3];
+d3.select('body').data(dataset);</code></pre>
+
+            <ul class="fragment" data-fragment-id="0">
+              <li>Recieves an array or function</li>
+              <li>By default binds by index</li>
+              <li>3 possible states
+                <ul class="fragment" data-fragment-id="1">
+                  <li>Update</li>
+                  <li>Enter</li>
+                  <li>Exit</li>
+                </ul>
+              </li>
+            </ul>
+					</section>
+
+          <section>
+            <h2>Data join</h2>
+            <pre><code>var dataset = [1,2,3];
+d3.select('body').data(dataset) //update
+    .enter()
+    .remove();</code></pre>
+            <img width="60%" src="img/thinking.png" />
+            <p><a href="examples/example1.html">Open example 1</a></p>
+          </section>
+				</section>
+
+				<!-- Example2 -->
+				<section>
+          <section>
+            <h2>Operating on selections</h2>
+            <p>The update, enter and exit methods all return selections. These have a set of methods (
+            <a href="https://github.com/mbostock/d3/wiki/Selections">documentation</a>). For now we will concentrate on {selection}.append()</p>
+          </section>
+
+          <section>
+            <h2>Append</h2>
+            <blockquote>Appends a new element with the specified name as the last child of each element in the current selection, returning a new selection containing the appended elements. Each new element inherits the data of the current elements, if any, in the same manner as select for subselections.</blockquote>
+          </section>
+
+          <section>
+            <h2>Populate a table with d3</h2>
+            <img src="img/table.png">
+            <h4>Tip</h4>
+            <blockquote>d3.values(<em>Object</em>)<br>
+              returns an array with all the value of an object</blockquote>
+            <p><small><a href="examples/example2.html">Answer in example #2</a></small></p>
+          </section>
+				</section>
+
+				<!-- Example3 -->
+				<section>
+          <section>
+            <h2>Other operators</h2>
+            <p>Selections have other operators besides <span class="code">data</span> and <span class="code">append</span>.</p>
+            <ul class="fragment" data-fragment-id="0">
+              <li>text</li>
+              <li>attr</li>
+            </ul>
+            <p class="fragment" data-fragment-id="1">These fragments, like data, can also take as an argument an anonymous function that will recieve the data bound to that element</p>
+            <pre class="fragment" data-fragment-id="2"><code>{selection}.attr(function(d){ return d.name; });</code></pre>
+          </section>
+
+          <section>
+            <h2>Example 3</h2>
+            <h3>Our first bar chart</h3>
+            <p>Create a div where the width of the div is given by the <span class="code">sepalWidth</span> of each entry in the dataset</p>
+            <p><small><a href="examples/example3.html">Answer in example #3</a></small></p>
+          </section>
+				</section>
+
+				<!-- Example 4 -->
+				<section>
+					<h2>Example 4</h2>
+          <h3>The update method</h3>
+          <p>Limit the data set to 5 elements, and update the bars every second. Have the bars transition between their colors and width.</p>
+          <p><small><a href="examples/example4.html">Answer in example #4</a></small></p>
+				</section>
+
+				<section>
+            <section>
+              <h1>SVG</h1>
+              <p>Svg's elements differ from HTML elements pretty much in every way. Except that they are still targetable by css and their general structure</p>
+              <a href="http://www.w3.org/TR/SVG/">w3 spec</a>
+            </section>
+
+            <section>
+              <h2>Elements</h2>
+              <ul>
+                <li>rect</li>
+                <li>text</li>
+              </ul>
+             </section>
+             <section>
+               <h2>Attributes</h2>
+               <ul>
+                <li>x and y</li>
+                <li>class</li>
+                <li>width and height</li>
+               </ul>
+             </section>
+
+             <section>
+               <h2>Example 5</h2>
+               <p>Lets start drawing in svg. Instead of divs we will be appending <span class="code">rect</span> elements to the svg</p>
+
+               <br><br>
+               <p><span class="code">{selection}call(fn)</span></p>
+               <p>Calls a function with the {selection} as -this- inside the fn context.</p>
+               <p><small><a href="examples/example5.html">Answer in example #5</a></small></p>
+             </section>
+				</section>
+
+        <!--  Scales -->
+				<section>
+          <section>
+            <h2>Scales</h2>
+            <p>Convert between data and visual encodings (per the documentation)<p>
+            <br>
+            <img width="60%" src="img/scales.png" />
+          </section>
+
+          <section>
+            <h3>Linear Scales</h3>
+            <p>There are many type of scales supported by d3 out of the box but for now we will focus on linear scales</p>
+            <br>
+            <p>Domain: <br> An array of the min and max possible values in your dataset</p><br>
+            <p>Range: <br>An array of the min and max possible values to scale a value in the domain to.</p>
+          </section>
+
+          <section>
+            <h2>Example 6</h2>
+            <h3>Working with scales</h3>
+            <p>use a yScale so that based on <span class="code">petalLength</span> the tallest in the dataset takes up all the heigh in the svg</p>
+            <p><small><a href="examples/example6.html">Answer in example #6</a></small></p>
+          </section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Example 7</h2>
+						<h3>Axes</h3>
+            <p>How to add axes using your scales.</p>
+            <p><small><a href="examples/example7.html">Answer in example #7</a></small></p>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h1>SVG - controls</h1>
+            <div>Using brushes with SVG will help us create interactive charts where users are able to select ranges from a chart.</div>
+            <p>Documentation and examples - <a href="https://github.com/mbostock/d3/wiki/SVG-Controls">here</a></p>
+					</section>
+
+          <section>
+            <h2>Brushes</h2>
+            <p>Add a brush to one of your tables (scales needed) and whenever you move the extent, populate a table with the selected items</p>
+            <p><small><a href="examples/example8.html">Answer in example #8</a></small></p>
+          </section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Bostocks' Scrolls of wisdom</h2>
+						<p><small><a href="http://bost.ocks.org/mike/chart/">Reusable Charts</a></small></p>
+						<p><small><a href="http://bl.ocks.org/mbostock/3019563">Margin Convention</a></small></p>
+						<p><small><a href="http://bost.ocks.org/mike/join/">Thinking with joins</a></small></p>
+						<p><small><a href="http://bl.ocks.org/mbostock/3808218">Update Pattern</a></small></p>
+						<p><small><a href="http://bost.ocks.org/mike/selection/">How Selections work</a></small></p>
+						<img width="50%" src="img/reusable.png">
+					</section>
+				</section>
+
+        <section>
+          <h1>Thank you!</h1>
+				</section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+        backgroundTransition:'slide',
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'linear', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Parallax scrolling
+				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				// parallaxBackgroundSize: '2100px 900px',
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
