@@ -1,0 +1,21 @@
+dataset = [
+  {"revenue": 5.1, "sepalWidth": 3.5, "cost": 1.4, "petalWidth": 0.2, "species": "setosa"},
+  {"revenue": 4.9, "sepalWidth": 3.0, "cost": 1.4, "petalWidth": 0.2, "species": "setosa"},
+  {"revenue": 4.7, "sepalWidth": 3.2, "cost": 1.3, "petalWidth": 0.2, "species": "setosa"},
+  {"revenue": 4.6, "sepalWidth": 3.1, "cost": 1.5, "petalWidth": 0.2, "species": "setosa"},
+  {"revenue": 5.0, "sepalWidth": 3.6, "cost": 1.4, "petalWidth": 0.2, "species": "setosa"},
+  {"revenue": 5.4, "sepalWidth": 3.9, "cost": 1.7, "petalWidth": 0.4, "species": "setosa"},
+  {"revenue": 4.6, "sepalWidth": 3.4, "cost": 1.4, "petalWidth": 0.3, "species": "setosa"},
+  {"revenue": 5.0, "sepalWidth": 3.4, "cost": 1.5, "petalWidth": 0.2, "species": "setosa"},
+  {"revenue": 4.4, "sepalWidth": 2.9, "cost": 1.4, "petalWidth": 0.2, "species": "setosa"},
+  {"revenue": 4.9, "sepalWidth": 3.1, "cost": 1.5, "petalWidth": 0.1, "species": "setosa"},
+  {"revenue": 5.4, "sepalWidth": 3.7, "cost": 1.5, "petalWidth": 0.2, "species": "setosa"},
+  {"revenue": 4.8, "sepalWidth": 3.4, "cost": 1.6, "petalWidth": 0.2, "species": "setosa"},
+  {"revenue": 4.8, "sepalWidth": 3.0, "cost": 1.4, "petalWidth": 0.1, "species": "setosa"},
+  {"revenue": 4.3, "sepalWidth": 3.0, "cost": 1.1, "petalWidth": 0.1, "species": "setosa"},
+  {"revenue": 5.8, "sepalWidth": 4.0, "cost": 1.2, "petalWidth": 0.2, "species": "setosa"},
+  {"revenue": 5.7, "sepalWidth": 4.4, "cost": 1.5, "petalWidth": 0.4, "species": "setosa"},
+  {"revenue": 5.4, "sepalWidth": 3.9, "cost": 1.3, "petalWidth": 0.4, "species": "setosa"},
+  {"revenue": 5.1, "sepalWidth": 3.5, "cost": 1.4, "petalWidth": 0.3, "species": "setosa"},
+  {"revenue": 5.9, "sepalWidth": 3.0, "cost": 5.1, "petalWidth": 1.8, "species": "virginica"}
+];
