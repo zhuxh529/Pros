@@ -8,8 +8,8 @@
 
 </head>
 <body>
-  <div class="container" style="position:absolute; left:100px;">
-    <svg id="svg" >
+  <div class="container" style="position:absolute; left:100px;overflow:visible;">
+    <svg id="svg" style="overflow:visible;">
     </svg>
   </div>
 
@@ -26,13 +26,33 @@
   
 var Chart = function(dataset){
       this.dataset = dataset;
-      var svgW = 1000, svgH = 400;
+      var svgW = 900, svgH = 500;
       var height_factor=40;
       var plot = function() {
 
+
+        var yScale = d3.scale.linear()
+          .domain([8, 0])   
+          .range([0, 300]);  
+
+        var xScale = d3.scale.linear()
+          .domain([0, 20])   
+          .range([0, 860]);   
+        
         var svg = this.attr("width", svgW)
           .attr("height", svgH);
           
+        var yAxis = d3.svg.axis()
+            .orient("left")
+            // .tickSize([0.1,1])
+            .scale(yScale);
+        
+        // define the y axis
+        var xAxis = d3.svg.axis()
+            .orient("bottom")
+            // .tickSize([0.1,1])
+            .scale(xScale);
+
 
         svg.selectAll("rect.title")
           .data(function(d){ return d;})
@@ -47,6 +67,31 @@ var Chart = function(dataset){
           .enter().append('rect')
           .call(drawRectangles2);
 
+
+          svg.append("g")
+            .attr("transform", "translate(40,106)")
+            .attr("y", function(d){return svgH;})
+            .call(yAxis);
+
+          svg.append("g")
+            .attr("transform", "translate(40,400)")
+            .attr("y", function(d){return svgH;})
+            .call(xAxis);
+
+          svg.selectAll("text.title")
+          .data(function(d){ return d;})
+          .call(add_text)
+          .enter()
+          .append("text")
+          .call(add_text);
+
+          svg.selectAll("text.value")
+          .data(function(d){ return d;})
+          .call(add_text2)
+          .enter()
+          .append("text")
+          .call(add_text2);
+
       }
 
       
@@ -54,8 +99,8 @@ var Chart = function(dataset){
         var barW = svgW/(selection.size()+1);
         var barPadding = 2;
        
-        this.attr("x", function(d,i){return ((i-2)*(barW) ); })
-        .attr("y", function(d){return svgH - (d.revenue * height_factor)})
+        this.attr("x", function(d,i){return ((i-2)*(barW) )+135; })
+        .attr("y", function(d){return svgH-100 - (d.revenue * height_factor)})
         .attr("width", 11)
         .attr("height", function(d){return (d.revenue * height_factor)})
         .attr("fill", "teal");
@@ -67,8 +112,8 @@ var Chart = function(dataset){
         var barW = svgW/(selection.size()+1);
         var barPadding = 2;
        
-        this.attr("x", function(d,i){return 0.5*barW+((i-2)*(barW) ); })
-        .attr("y", function(d){return svgH - (d.revenue * height_factor)})
+        this.attr("x", function(d,i){return 0.5*barW+((i-2)*(barW) ) +135; })
+        .attr("y", function(d){return svgH-100 - (d.revenue * height_factor)})
         .attr("width", 11)
         .attr("height", function(d){return (d.cost * height_factor)})
         .attr("fill", "red");
@@ -76,12 +121,52 @@ var Chart = function(dataset){
         return this;
       }
 
+      var add_text = function(selection) {
+        var barW = svgW/(selection.size()+1);
+
+        this.text(function(d){return d.revenue;})
+          .attr("x",function(d,i){return ((i-2)*(barW) )+135; })
+          .attr("y", function(d){return svgH-110 - (d.revenue * height_factor)})
+          .attr("fill", "black")
+          .attr("font-size",11)
+
+        return this;
+      }
+
+      var add_text2 = function(selection) {
+        var barW = svgW/(selection.size()+1);
+
+        this.text(function(d){return d.cost;})
+          .attr("x",function(d,i){return 0.5*barW+((i-2)*(barW) )+135; })
+          .attr("y", function(d){return svgH-110 - (d.revenue * height_factor)})
+          .attr("fill", "black")
+          .attr("font-size",11)
+
+        return this;
+      }
+
+
+
       return plot;
     };
 
 
   var chart = new Chart();
   var shuffledData = dataset;
+
+
+  // var normalizeData = function(dataset) {
+  //   var series = {};
+  //   dataset.forEach(function(v,i){
+  //     series[v.species] = series[v.species] || [];
+  //     series[v.species].push(v);
+  //   })
+
+  //   return series;
+  // }
+
+  // console.log(normalizeData(dataset));
+
   d3.select("svg")
       .data([shuffledData])
       .call(chart);
