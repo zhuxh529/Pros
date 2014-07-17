@@ -1,0 +1,303 @@
+
+Active Connections
+
+  Proto  Local Address          Foreign Address        State           PID
+  TCP    0.0.0.0:80             0.0.0.0:0              LISTENING       4
+ Can not obtain ownership information
+  TCP    0.0.0.0:135            0.0.0.0:0              LISTENING       972
+  RpcSs
+ [svchost.exe]
+  TCP    0.0.0.0:445            0.0.0.0:0              LISTENING       4
+ Can not obtain ownership information
+  TCP    0.0.0.0:623            0.0.0.0:0              LISTENING       5788
+ [LMS.exe]
+  TCP    0.0.0.0:2401           0.0.0.0:0              LISTENING       2408
+ [cvsservice.exe]
+  TCP    0.0.0.0:3389           0.0.0.0:0              LISTENING       1876
+  CryptSvc
+ [svchost.exe]
+  TCP    0.0.0.0:5800           0.0.0.0:0              LISTENING       3612
+ [WinVNC4.exe]
+  TCP    0.0.0.0:5900           0.0.0.0:0              LISTENING       3612
+ [WinVNC4.exe]
+  TCP    0.0.0.0:8192           0.0.0.0:0              LISTENING       3824
+ [RouterNT.exe]
+  TCP    0.0.0.0:8193           0.0.0.0:0              LISTENING       3824
+ [RouterNT.exe]
+  TCP    0.0.0.0:8194           0.0.0.0:0              LISTENING       3824
+ [RouterNT.exe]
+  TCP    0.0.0.0:9999           0.0.0.0:0              LISTENING       4104
+ [XMusicServer.exe]
+  TCP    0.0.0.0:16992          0.0.0.0:0              LISTENING       5788
+ [LMS.exe]
+  TCP    0.0.0.0:49152          0.0.0.0:0              LISTENING       700
+ [wininit.exe]
+  TCP    0.0.0.0:49153          0.0.0.0:0              LISTENING       176
+  eventlog
+ [svchost.exe]
+  TCP    0.0.0.0:49154          0.0.0.0:0              LISTENING       560
+  Schedule
+ [svchost.exe]
+  TCP    0.0.0.0:49157          0.0.0.0:0              LISTENING       784
+ [lsass.exe]
+  TCP    0.0.0.0:52681          0.0.0.0:0              LISTENING       764
+ [services.exe]
+  TCP    0.0.0.0:52691          0.0.0.0:0              LISTENING       5296
+  PolicyAgent
+ [svchost.exe]
+  TCP    0.0.0.0:53161          0.0.0.0:0              LISTENING       3708
+ [ManagementAgentNT.exe]
+  TCP    0.0.0.0:53162          0.0.0.0:0              LISTENING       3708
+ [ManagementAgentNT.exe]
+  TCP    127.0.0.1:2402         0.0.0.0:0              LISTENING       2448
+ [cvslock.exe]
+  TCP    127.0.0.1:52678        127.0.0.1:52679        ESTABLISHED     3824
+ [RouterNT.exe]
+  TCP    127.0.0.1:52679        127.0.0.1:52678        ESTABLISHED     3824
+ [RouterNT.exe]
+  TCP    127.0.0.1:52760        127.0.0.1:52761        ESTABLISHED     6268
+ [chrome.exe]
+  TCP    127.0.0.1:52761        127.0.0.1:52760        ESTABLISHED     6268
+ [chrome.exe]
+  TCP    127.0.0.1:52769        127.0.0.1:62522        ESTABLISHED     6452
+ [vpnui.exe]
+  TCP    127.0.0.1:52771        127.0.0.1:52772        ESTABLISHED     6268
+ [chrome.exe]
+  TCP    127.0.0.1:52772        127.0.0.1:52771        ESTABLISHED     6268
+ [chrome.exe]
+  TCP    127.0.0.1:53074        0.0.0.0:0              LISTENING       9064
+ [UNS.exe]
+  TCP    127.0.0.1:53158        127.0.0.1:53159        ESTABLISHED     3708
+ [ManagementAgentNT.exe]
+  TCP    127.0.0.1:53159        127.0.0.1:53158        ESTABLISHED     3708
+ [ManagementAgentNT.exe]
+  TCP    127.0.0.1:53315        127.0.0.1:53316        ESTABLISHED     6268
+ [chrome.exe]
+  TCP    127.0.0.1:53316        127.0.0.1:53315        ESTABLISHED     6268
+ [chrome.exe]
+  TCP    127.0.0.1:53487        127.0.0.1:53488        ESTABLISHED     6268
+ [chrome.exe]
+  TCP    127.0.0.1:53488        127.0.0.1:53487        ESTABLISHED     6268
+ [chrome.exe]
+  TCP    127.0.0.1:53496        127.0.0.1:53497        ESTABLISHED     6268
+ [chrome.exe]
+  TCP    127.0.0.1:53497        127.0.0.1:53496        ESTABLISHED     6268
+ [chrome.exe]
+  TCP    127.0.0.1:54206        127.0.0.1:54207        ESTABLISHED     6268
+ [chrome.exe]
+  TCP    127.0.0.1:54207        127.0.0.1:54206        ESTABLISHED     6268
+ [chrome.exe]
+  TCP    127.0.0.1:54373        127.0.0.1:54374        TIME_WAIT       0
+  TCP    127.0.0.1:54376        127.0.0.1:54377        TIME_WAIT       0
+  TCP    127.0.0.1:54379        127.0.0.1:54380        TIME_WAIT       0
+  TCP    127.0.0.1:54382        127.0.0.1:54383        TIME_WAIT       0
+  TCP    127.0.0.1:54397        127.0.0.1:54398        ESTABLISHED     6268
+ [chrome.exe]
+  TCP    127.0.0.1:54398        127.0.0.1:54397        ESTABLISHED     6268
+ [chrome.exe]
+  TCP    127.0.0.1:54400        127.0.0.1:54401        ESTABLISHED     6268
+ [chrome.exe]
+  TCP    127.0.0.1:54401        127.0.0.1:54400        ESTABLISHED     6268
+ [chrome.exe]
+  TCP    127.0.0.1:54420        127.0.0.1:54421        ESTABLISHED     6268
+ [chrome.exe]
+  TCP    127.0.0.1:54421        127.0.0.1:54420        ESTABLISHED     6268
+ [chrome.exe]
+  TCP    127.0.0.1:62514        0.0.0.0:0              LISTENING       2212
+ [cvpnd.exe]
+  TCP    127.0.0.1:62522        0.0.0.0:0              LISTENING       1848
+ [vpnagent.exe]
+  TCP    127.0.0.1:62522        127.0.0.1:52769        ESTABLISHED     1848
+ [vpnagent.exe]
+  TCP    172.31.200.240:139     0.0.0.0:0              LISTENING       4
+ Can not obtain ownership information
+  TCP    172.31.200.240:8194    172.19.1.178:53791     ESTABLISHED     3824
+ [RouterNT.exe]
+  TCP    172.31.200.240:8194    172.31.200.240:53160   ESTABLISHED     3824
+ [RouterNT.exe]
+  TCP    172.31.200.240:52695   172.31.1.1:389         CLOSE_WAIT      2924
+ [ReportingServicesService.exe]
+  TCP    172.31.200.240:52728   172.16.5.120:445       ESTABLISHED     4
+ Can not obtain ownership information
+  TCP    172.31.200.240:52762   64.233.160.188:5228    ESTABLISHED     6268
+ [chrome.exe]
+  TCP    172.31.200.240:52773   74.125.196.125:5222    ESTABLISHED     6268
+ [chrome.exe]
+  TCP    172.31.200.240:52800   10.10.10.86:5061       ESTABLISHED     6260
+ [lync.exe]
+  TCP    172.31.200.240:52821   172.16.5.64:7576       ESTABLISHED     6260
+ [lync.exe]
+  TCP    172.31.200.240:52850   172.16.5.64:7575       ESTABLISHED     6304
+ [OUTLOOK.EXE]
+  TCP    172.31.200.240:52853   172.16.5.64:7575       ESTABLISHED     6304
+ [OUTLOOK.EXE]
+  TCP    172.31.200.240:52854   172.16.5.64:7576       ESTABLISHED     6304
+ [OUTLOOK.EXE]
+  TCP    172.31.200.240:52858   172.16.5.62:7575       ESTABLISHED     6304
+ [OUTLOOK.EXE]
+  TCP    172.31.200.240:52996   172.16.5.64:7575       ESTABLISHED     8324
+ [UcMapi.exe]
+  TCP    172.31.200.240:52998   172.16.5.64:7576       ESTABLISHED     8324
+ [UcMapi.exe]
+  TCP    172.31.200.240:53003   172.16.5.62:7575       ESTABLISHED     8324
+ [UcMapi.exe]
+  TCP    172.31.200.240:53160   172.31.200.240:8194    ESTABLISHED     3708
+ [ManagementAgentNT.exe]
+  TCP    172.31.200.240:53162   172.31.200.240:53163   ESTABLISHED     3708
+ [ManagementAgentNT.exe]
+  TCP    172.31.200.240:53163   172.31.200.240:53162   ESTABLISHED     3824
+ [RouterNT.exe]
+  TCP    172.31.200.240:53173   172.19.1.178:8194      ESTABLISHED     3824
+ [RouterNT.exe]
+  TCP    172.31.200.240:53278   209.20.75.76:80        CLOSE_WAIT      8548
+ [sublime_text.exe]
+  TCP    172.31.200.240:53317   74.125.227.197:443     ESTABLISHED     6268
+ [chrome.exe]
+  TCP    172.31.200.240:53501   74.125.227.212:443     ESTABLISHED     6268
+ [chrome.exe]
+  TCP    172.31.200.240:53507   74.125.227.206:443     ESTABLISHED     6268
+ [chrome.exe]
+  TCP    172.31.200.240:54208   74.125.227.210:80      ESTABLISHED     6268
+ [chrome.exe]
+  TCP    172.31.200.240:54399   165.254.29.200:80      ESTABLISHED     6268
+ [chrome.exe]
+  TCP    172.31.200.240:54402   74.125.227.198:80      ESTABLISHED     6268
+ [chrome.exe]
+  TCP    172.31.200.240:54422   74.125.227.193:443     ESTABLISHED     6268
+ [chrome.exe]
+  TCP    172.31.200.240:54474   172.31.1.5:80          TIME_WAIT       0
+  TCP    172.31.200.240:54475   172.31.1.5:80          ESTABLISHED     1796
+ [AeXNSAgent.exe]
+  TCP    172.31.200.240:54476   23.96.212.225:443      ESTABLISHED     1364
+ [MpCmdRun.exe]
+  TCP    [::]:80                [::]:0                 LISTENING       4
+ Can not obtain ownership information
+  TCP    [::]:135               [::]:0                 LISTENING       972
+  RpcSs
+ [svchost.exe]
+  TCP    [::]:445               [::]:0                 LISTENING       4
+ Can not obtain ownership information
+  TCP    [::]:623               [::]:0                 LISTENING       5788
+ [LMS.exe]
+  TCP    [::]:2401              [::]:0                 LISTENING       2408
+ [cvsservice.exe]
+  TCP    [::]:3389              [::]:0                 LISTENING       1876
+  CryptSvc
+ [svchost.exe]
+  TCP    [::]:16992             [::]:0                 LISTENING       5788
+ [LMS.exe]
+  TCP    [::]:49152             [::]:0                 LISTENING       700
+ [wininit.exe]
+  TCP    [::]:49153             [::]:0                 LISTENING       176
+  eventlog
+ [svchost.exe]
+  TCP    [::]:49154             [::]:0                 LISTENING       560
+  Schedule
+ [svchost.exe]
+  TCP    [::]:49157             [::]:0                 LISTENING       784
+ [lsass.exe]
+  TCP    [::]:52681             [::]:0                 LISTENING       764
+ [services.exe]
+  TCP    [::]:52691             [::]:0                 LISTENING       5296
+  PolicyAgent
+ [svchost.exe]
+  TCP    [::1]:2402             [::]:0                 LISTENING       2448
+ [cvslock.exe]
+  TCP    [::1]:49156            [::]:0                 LISTENING       2652
+ [jhi_service.exe]
+  TCP    [::1]:53066            [::1]:53068            ESTABLISHED     5788
+ [LMS.exe]
+  TCP    [::1]:53068            [::1]:53066            ESTABLISHED     5788
+ [LMS.exe]
+  UDP    0.0.0.0:68             *:*                                    176
+  Dhcp
+ [svchost.exe]
+  UDP    0.0.0.0:123            *:*                                    1136
+  W32Time
+ [svchost.exe]
+  UDP    0.0.0.0:500            *:*                                    560
+  IKEEXT
+ [svchost.exe]
+  UDP    0.0.0.0:4500           *:*                                    560
+  IKEEXT
+ [svchost.exe]
+  UDP    0.0.0.0:5353           *:*                                    2448
+ [cvslock.exe]
+  UDP    0.0.0.0:5355           *:*                                    1876
+  Dnscache
+ [svchost.exe]
+  UDP    0.0.0.0:49152          *:*                                    3136
+ [swi_service.exe]
+  UDP    0.0.0.0:49153          *:*                                    3136
+ [swi_service.exe]
+  UDP    0.0.0.0:51235          *:*                                    3708
+ [ManagementAgentNT.exe]
+  UDP    0.0.0.0:58512          *:*                                    7116
+ [baidupinyin.exe]
+  UDP    127.0.0.1:1900         *:*                                    1236
+  SSDPSRV
+ [svchost.exe]
+  UDP    127.0.0.1:51648        *:*                                    1796
+ [AeXNSAgent.exe]
+  UDP    127.0.0.1:53685        *:*                                    5288
+ [Evernote.exe]
+  UDP    127.0.0.1:55069        *:*                                    560
+  gpsvc
+ [svchost.exe]
+  UDP    127.0.0.1:55644        *:*                                    784
+ [lsass.exe]
+  UDP    127.0.0.1:59430        *:*                                    6304
+ [OUTLOOK.EXE]
+  UDP    127.0.0.1:59754        *:*                                    1236
+  SSDPSRV
+ [svchost.exe]
+  UDP    127.0.0.1:61094        *:*                                    1876
+  NlaSvc
+ [svchost.exe]
+  UDP    127.0.0.1:62514        *:*                                    2212
+ [cvpnd.exe]
+  UDP    127.0.0.1:63615        *:*                                    7116
+ [baidupinyin.exe]
+  UDP    127.0.0.1:63807        *:*                                    9132
+ [iexplore.exe]
+  UDP    127.0.0.1:63899        *:*                                    2924
+ [ReportingServicesService.exe]
+  UDP    172.31.200.240:137     *:*                                    4
+ Can not obtain ownership information
+  UDP    172.31.200.240:138     *:*                                    4
+ Can not obtain ownership information
+  UDP    172.31.200.240:1900    *:*                                    1236
+  SSDPSRV
+ [svchost.exe]
+  UDP    172.31.200.240:59753   *:*                                    1236
+  SSDPSRV
+ [svchost.exe]
+  UDP    172.31.200.240:65260   *:*                                    6268
+ [chrome.exe]
+  UDP    [::]:123               *:*                                    1136
+  W32Time
+ [svchost.exe]
+  UDP    [::]:500               *:*                                    560
+  IKEEXT
+ [svchost.exe]
+  UDP    [::]:4500              *:*                                    560
+  IKEEXT
+ [svchost.exe]
+  UDP    [::]:5355              *:*                                    1876
+  Dnscache
+ [svchost.exe]
+  UDP    [::1]:1900             *:*                                    1236
+  SSDPSRV
+ [svchost.exe]
+  UDP    [::1]:59752            *:*                                    1236
+  SSDPSRV
+ [svchost.exe]
+  UDP    [fe80::99b2:cf81:cdb6:94b7%22]:546  *:*                                    176
+  Dhcp
+ [svchost.exe]
+  UDP    [fe80::99b2:cf81:cdb6:94b7%22]:1900  *:*                                    1236
+  SSDPSRV
+ [svchost.exe]
+  UDP    [fe80::99b2:cf81:cdb6:94b7%22]:59751  *:*                                    1236
+  SSDPSRV
+ [svchost.exe]
